@@ -1,0 +1,117 @@
+.lucky_number {
+  font-size: 100px;
+  font-weight: bold;
+  color: #4cb050;
+}
+
+.main-card {
+  background: #f44236;
+  border: none;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+p {
+  margin-bottom: 0px;
+}
+
+.update-time {
+  font-size: 13px;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.time-text {
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.title-text {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: rgb(233, 233, 233);
+}
+
+.data-text {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.result-text {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fcff2d;
+}
+
+/* animation */
+
+.lucky_number {
+  animation: luckyNumberBlinkingText 1.3s infinite;
+  -webkit-animation: luckyNumberBlinkingText 1.3s infinite;
+}
+
+.result_number_blinking {
+  animation: resultNumberBlinkingText 1.3s infinite;
+  -webkit-animation: resultNumberBlinkingText 1.3s infinite;
+}
+.data_number_blinking {
+  animation: dataNumberBlinkingText 1.3s infinite;
+  -webkit-animation: dataNumberBlinkingText 1.3s infinite;
+}
+
+@keyframes luckyNumberBlinkingText {
+  0% {
+    color: #4cb050;
+  }
+  49% {
+    color: #4cb050;
+  }
+  60% {
+    color: transparent;
+  }
+  99% {
+    color: transparent;
+  }
+  100% {
+    color: #4cb050;
+  }
+}
+
+@keyframes resultNumberBlinkingText {
+  0% {
+    color: #fcff2d;
+  }
+  49% {
+    color: #fcff2d;
+  }
+  60% {
+    color: transparent;
+  }
+  99% {
+    color: transparent;
+  }
+  100% {
+    color: #fcff2d;
+  }
+}
+
+@keyframes dataNumberBlinkingText {
+  0% {
+    color: #fff;
+  }
+  49% {
+    color: #fff;
+  }
+  60% {
+    color: transparent;
+  }
+  99% {
+    color: transparent;
+  }
+  100% {
+    color: #fff;
+  }
+}
