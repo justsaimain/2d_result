@@ -1,3 +1,7 @@
+body {
+  background: url("./src/background.png");
+}
+
 .lucky_number {
   font-size: 100px;
   font-weight: bold;
@@ -24,6 +28,10 @@ p {
   font-weight: 500;
 }
 
+.update-time span {
+  font-style: normal;
+}
+
 .time-text {
   font-weight: 500;
   font-size: 20px;
@@ -46,9 +54,22 @@ p {
   color: #fcff2d;
 }
 
+.link-text {
+  text-decoration: none;
+  font-size: 13px;
+  color: #4cb050;
+  display: block;
+  margin-top: 10px;
+}
+
+a[href="https://www.000webhost.com/?utm_source=000webhostapp&utm_campaign=000_logo&utm_medium=website&utm_content=footer_img"]
+{
+  display: none !important;
+}
+
 /* animation */
 
-.lucky_number {
+.lucky_number_blinking {
   animation: luckyNumberBlinkingText 1.3s infinite;
   -webkit-animation: luckyNumberBlinkingText 1.3s infinite;
 }
