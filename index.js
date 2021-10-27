@@ -271,7 +271,8 @@ $(document).ready(function(){
                 
                 const last_set = result.index[0].last;
                 const total_value = result.index[0].total_value;
-                var update_time = `${today.getFullYear()}-${today.getUTCMonth() + 1}-${today.getDate()} ${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`
+                var getTime = new Date();
+                var update_time = `${getTime.getFullYear()}-${getTime.getUTCMonth() + 1}-${getTime.getDate()} ${getTime.getHours()}:${getTime.getMinutes()}:${getTime.getSeconds()}`
                 const last_value = insertDecimal(parseInt(total_value.toString().substring(0,8))).toFixed(2);
     
                 // update number
@@ -287,6 +288,8 @@ $(document).ready(function(){
                 $('.update-time').html(`<span style="color:#52B356">&#10003;</span> Updated: ${update_time}`);
 
                 $('.lucky_number').addClass('lucky_number_blinking');
+                $('.today-evening-set').addClass('data_number_blinking');
+                $('.today-evening-value').addClass('data_number_blinking');
 
                 console.log('Evening Data Update');
             },
@@ -308,7 +311,8 @@ $(document).ready(function(){
                 
                 const last_set = result.index[0].last;
                 const total_value = result.index[0].total_value;
-                var update_time = `${today.getFullYear()}-${today.getUTCMonth() + 1}-${today.getDate()} ${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`
+                var getTime = new Date();
+                var update_time = `${getTime.getFullYear()}-${getTime.getUTCMonth() + 1}-${getTime.getDate()} ${getTime.getHours()}:${getTime.getMinutes()}:${getTime.getSeconds()}`
                 const last_value = insertDecimal(parseInt(total_value.toString().substring(0,8))).toFixed(2);
     
                 // update number
@@ -323,6 +327,10 @@ $(document).ready(function(){
                 $('.lucky_number').text(two2_result);
                 $('.update-time').html(`<span style="color:#52B356">&#10003;</span> Updated: ${update_time}`);
                 $('.lucky_number').addClass('lucky_number_blinking');
+
+                $('.lucky_number').addClass('lucky_number_blinking');
+                $('.today-evening-set').addClass('data_number_blinking');
+                $('.today-evening-value').addClass('data_number_blinking');
 
                 console.log('Noon Data Update');
 
@@ -339,6 +347,8 @@ $(document).ready(function(){
         url: noon_url,
         type: "GET", 
         dataType: "json",
+        tryCount : 0,
+        retryLimit : 3,
         data: {
         },
         success: function (result) {
@@ -347,7 +357,8 @@ $(document).ready(function(){
             const set = data['Set'];
             const value = data['Value'];
             const num = data['No.'];
-            var update_time = `${today.getFullYear()}-${today.getUTCMonth() + 1}-${today.getDate()} ${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`
+            var getTime = new Date();
+            var update_time = `${getTime.getFullYear()}-${getTime.getUTCMonth() + 1}-${getTime.getDate()} ${getTime.getHours()}:${getTime.getMinutes()}:${getTime.getSeconds()}`
 
             // update number
             $('.today-noon-set').text(set);
@@ -358,8 +369,21 @@ $(document).ready(function(){
 
             console.log('Noon Final Data Success');
         },
-        error: function () {
-            console.log("error");
+        error : function(xhr, textStatus, errorThrown ) {
+            if (textStatus == 'timeout') {
+                this.tryCount++;
+                if (this.tryCount <= this.retryLimit) {
+                    //try again
+                    $.ajax(this);
+                    return;
+                }            
+                return;
+            }
+            if (xhr.status == 500) {
+                //handle error
+            } else {
+                //handle error
+            }
         }
         });
     }
@@ -371,6 +395,8 @@ $(document).ready(function(){
             url: evening_url,
             type: "GET", 
             dataType: "json",
+            tryCount : 0,
+            retryLimit : 3,
             data: {
             },
             success: function (result) {
@@ -379,7 +405,8 @@ $(document).ready(function(){
                 const set = data['Set'];
                 const value = data['Value'];
                 const num = data['No.'];
-                var update_time = `${today.getFullYear()}-${today.getUTCMonth() + 1}-${today.getDate()} ${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`
+                var getTime = new Date();
+                var update_time = `${getTime.getFullYear()}-${getTime.getUTCMonth() + 1}-${getTime.getDate()} ${getTime.getHours()}:${getTime.getMinutes()}:${getTime.getSeconds()}`
     
                 // update number
                 $('.today-evening-set').text(set);
@@ -391,8 +418,21 @@ $(document).ready(function(){
                 console.log('Evening Final Data Success');
 
             },
-            error: function () {
-                console.log("error");
+            error : function(xhr, textStatus, errorThrown ) {
+                if (textStatus == 'timeout') {
+                    this.tryCount++;
+                    if (this.tryCount <= this.retryLimit) {
+                        //try again
+                        $.ajax(this);
+                        return;
+                    }            
+                    return;
+                }
+                if (xhr.status == 500) {
+                    //handle error
+                } else {
+                    //handle error
+                }
             }
         });
     }
