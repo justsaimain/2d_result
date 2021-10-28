@@ -1,5 +1,10 @@
-// TODO : show old data if not working time
-
+/*
+All these code are wrote by justsaimain
+If you want to need something about these code, contact me.
+Facebook - www.facebook.com/justsaimain
+Telegram - t.me/justsaimain
+Mail - saimain.primary@gmail.com
+*/
 
 $(document).ready(function(){
 
@@ -11,8 +16,8 @@ $(document).ready(function(){
 
     
 
-    const evening_working_time = '15:00';
-    const noon_working_time = '11:00';
+    const evening_working_time = 15;
+    const noon_working_time = 9;
     const evening_url = 'https://script.googleusercontent.com/macros/echo?user_content_key=VjGocMJHO7EPlGEZPk_V9MzllOqghFAdgQkxrBAmT9J3qDeR-3NgtsLWgHtabHbGRdX5_NfM0zA2Bd0hOfQykpUOP4xSVVebm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnA7wpYBcbC8hS8Zu_VBreS6KtPupjXSgETgIjyauKKelwsQVRMwQshXOk5PE_R0eujOmbnRGq-tk&lib=MZI6bu7bMuCZFcGtLMvcWq-02rlMmUn9c';
     const noon_url = 'https://script.googleusercontent.com/macros/echo?user_content_key=-4PRxiSnM6MxlXdK0fYVyLWJ9PgnapxhmwDzx94fIB5CWufAWfSxZ85kV4Szcz2VfLoW_W13vRo2Bd0hOfQykuPIBLgAuQBOm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnBhMKdr3mjZlOgpWGgftRlCZZJ-qd3lNGu_IBuGnyapFnqJ7rg5NvOFWn12Fp1Dxq7d8MAdYOYtX&lib=MYSvdm741KiQvKD1gOuNd9lc8OvjxXfAZ';
     const morning_mt_url = 'https://script.googleusercontent.com/macros/echo?user_content_key=vVUVTEjsbabJ1nfFPH32dt3opLgDX20Xb_8U2sS26TP7qzzCpMj0n1QbueobDo5EdZx4SVEN1cakGAbfzbIRODXKkfLv6eJcm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnDD7obfcXE_L0m1mn1qzzILd-GteJ15N_YeDOFvd95OSEYJLtBXFnAfFAcnuCPeQx3rQ0hWtQzda&lib=MjjbybzegotMTK8wYZnTVQ5bBiXdpBKA1';
@@ -26,6 +31,9 @@ $(document).ready(function(){
 
 
     const getOldNum = function(){
+
+        console.log('get old data');
+
         // noon data
         $.ajax({
             url: noon_url,
@@ -80,130 +88,6 @@ $(document).ready(function(){
             }
         });
     }
-
-    // const getData = function(){
-        
-    
-    //     if(now_hour >= evening){
-    //         // evening data update with noon data
-    
-    //         // get noon data
-    //         $.ajax({
-    //             url: noon_url,
-    //             type: "GET", 
-    //             dataType: "json",
-    //             data: {
-    //             },
-    //             success: function (result) {
-    //                 const data = result.twoD[0];
-    //                 const date = data['Date'];
-    //                 const set = data['Set'];
-    //                 const value = data['Value'];
-    //                 const num = data['No.'];
-    
-    //                 // update number
-                    
-    //                 if(set != '{{ twoDSetFinal }}\n\n- -' && value != '{{ twoDSetFinal }}\n\n- -' && num != '{{ twoDSetFinal }}\n\n- -'){
-    //                     $('.today-noon-set').text(set);
-    //                     $('.today-noon-value').text(value);
-    //                     $('.today-noon-result').text(num);
-    //                 }else{
-    //                     $('.today-noon-set').text(result.twoD[1]['Set']);
-    //                     $('.today-noon-value').text(result.twoD[1]['Value']);
-    //                     $('.today-noon-result').text(result.twoD[1]['No.']);
-    //                 }
-
-                   
-                    
-    //             },
-    //             error: function () {
-    //                 console.log("error");
-    //             }
-    //         });
-    
-    //         // get evening data
-    //         $.ajax({
-    //             url: evening_url,
-    //             type: "GET", 
-    //             dataType: "json",
-    //             data: {
-    //             },
-    //             success: function (result) {
-    //                 const data = result.twoD[0];
-    //                 const date = data['Date'];
-    //                 const set = data['Set'];
-    //                 const value = data['Value'];
-    //                 const num = data['No.'];
-    
-    //                 // update number
-    
-    //                 if(set != '\n\n- -' && value != '\n\n- -' && num != '\n\n- -'){ 
-                     
-    //                     if(now_hour <= evening_working_time){
-    //                         $('.today_evening_value').addClass('data_number_blinking');
-    //                         $('.today_evening_value').addClass('data_number_blinking');
-    //                         $('.today_evening_value').addClass('data_number_blinking');
-    //                     }else{
-    //                         $('.today_evening_value').removeClass('data_number_blinking');
-    //                         $('.today_evening_value').removeClass('data_number_blinking');
-    //                         $('.today_evening_value').removeClass('data_number_blinking');
-    //                     }
-                    
-                    
-    //                     $('.today-evening-set').text(set);
-    //                     $('.today-evening-value').text(value);
-    //                     $('.today-evening-result').text(num);
-    //                 }
-          
-                    
-    //             },
-    //             error: function () {
-    //                 console.log("error");
-    //             }
-    //         });
-    
-    //     }else{
-    //         // noon data
-    
-    //         // get noon data
-    //         $.ajax({
-    //             url: noon_url,
-    //             type: "GET", 
-    //             dataType: "json",
-    //             data: {
-    //             },
-    //             success: function (result) {
-    //                 const data = result.twoD[0];
-    //                 const date = data['Date'];
-    //                 const set = data['Set'];
-    //                 const value = data['Value'];
-    //                 const num = data['No.'];
-    
-    //                 // update number
-    //                 if(set != '{{ twoDSetFinal }}\n\n- -' && value != '{{ twoDSetFinal }}\n\n- -' && num != '{{ twoDSetFinal }}\n\n- -'){ 
-                        
-    //                     if(now_hour <= noon_working_time){
-    //                         $('.today_noon_set').addClass('data_number_blinking');
-    //                         $('.today_noon_value').addClass('data_number_blinking');
-    //                         $('.today_noon_result').addClass('data_number_blinking');
-    //                     }else{
-    //                         $('.today_noon_set').removeClass('data_number_blinking');
-    //                         $('.today_noon_value').removeClass('data_number_blinking');
-    //                         $('.today_noon_result').removeClass('data_number_blinking');
-    //                     }
-                     
-    //                     $('.today-noon-set').text(set);
-    //                     $('.today-noon-value').text(value);
-    //                     $('.today-noon-result').text(num);
-    //                 }
-                    
-    //             },
-    //             error: function () {
-    //                 console.log("error");
-    //             }
-    //         });
-    //     }
-    // }
 
     const getModernInternet = function(){
         // modern and internet
@@ -329,8 +213,8 @@ $(document).ready(function(){
                 $('.lucky_number').addClass('lucky_number_blinking');
 
                 $('.lucky_number').addClass('lucky_number_blinking');
-                $('.today-evening-set').addClass('data_number_blinking');
-                $('.today-evening-value').addClass('data_number_blinking');
+                $('.today-noon-set').addClass('data_number_blinking');
+                $('.today-noon-value').addClass('data_number_blinking');
 
                 console.log('Noon Data Update');
 
@@ -361,6 +245,7 @@ $(document).ready(function(){
             var update_time = `${getTime.getFullYear()}-${getTime.getUTCMonth() + 1}-${getTime.getDate()} ${getTime.getHours()}:${getTime.getMinutes()}:${getTime.getSeconds()}`
 
             // update number
+            
             $('.today-noon-set').text(set);
             $('.today-noon-value').text(value);
             $('.today-noon-result').text(num);
@@ -442,58 +327,59 @@ $(document).ready(function(){
 
     // init
 
-    $.ajax({
-        url: twoD_url,
-        type: "GET", 
-        dataType: "json",
-        cache:false,
-        data: {
-        },
-        success: function (result) {
-            const last_date_result = result.datetime;
-            const last_date = last_date_result.toString().substring(0,10);
-            const today_date = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
-         
-            if(last_date == today_date){
-               
-                if(now_hour > noon){
+    const getData = function(){
+        $.ajax({
+            url: twoD_url,
+            type: "GET", 
+            dataType: "json",
+            cache:false,
+            data: {
+            },
+            success: function (result) {
+                const last_date_result = result.datetime;
+                const last_date = last_date_result.toString().substring(0,10);
+                const today_date = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
+
+                const now_hr = parseInt(now_hour.toString().split(':')[0]);
+                const noon_hr = parseInt(noon.toString().split(':')[0]);
+                const even_hr = parseInt(evening.toString().split(':')[0]);
+                if(now_hr > noon_hr){
                     getNoonFinalData();
-                    if(now_hour > evening){
+                    if(now_hr > even_hr){
                         getEveningFinalData();
                     }else {
-                        if(now_hour > evening_working_time){
+                        if(now_hr > evening_working_time){
                             gettingEveningData();
                             setInterval(() => {
                                 gettingEveningData();
                             }, 5000);
-                        }else{
-                            getNoonFinalData();
                         }
                     }
+                    console.log(now_hour + '>' + noon);
+
                 }else{
-                    if(now_hour > noon_working_time){
+                    if(now_hr > noon_working_time){
                         getttingNoonData();
                         setInterval(() => {
                             getttingNoonData();
                         }, 5000);
                     }
                 }
-                
-
-            }else{
-                getOldNum();
+                    
+    
+    
+            },
+            error: function () {
+                console.log("error");
             }
-
-        },
-        error: function () {
-            console.log("error");
-        }
-    });
-
+        });
+    
+    } 
 
   
 
     getModernInternet();
+    getData();
 
     // functions call every 5 seconds
     setInterval(function() {
