@@ -1,0 +1,10 @@
+now = 9:00
+noon = 12:01
+evening = 4:30
+noon_working_time = 10:00
+evening_working_time = 3:00
+
+if ( now > eveing ) { GET_LAST_DATA_NOON_AND_EVENING_LUCKYNUMBER_EVENING_NUMBER }
+if ( now > noon_working_time ) { GETTING_NOON_DATA }
+if ( now > noon ) { GET_NOON_FINAL_DATA }
+if ( now > evening_working_time ) { GETTING_EVENING_DATA }
