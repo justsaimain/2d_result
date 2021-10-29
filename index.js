@@ -226,6 +226,47 @@ $(document).ready(function () {
 
     const gettingEveningData = function () {
         $.ajax({
+            url: noon_url,
+            type: "GET",
+            dataType: "json",
+            tryCount: 0,
+            retryLimit: 3,
+            data: {},
+            success: function (result) {
+                const data = result.twoD[0];
+                const set = data["Set"];
+                const value = data["Value"];
+                const num = data["No."];
+                var getTime = new Date();
+                var update_time = `${getTime.getFullYear()}-${
+                    getTime.getUTCMonth() + 1
+                }-${getTime.getDate()} ${getTime.getHours()}:${getTime.getMinutes()}:${getTime.getSeconds()}`;
+
+                // update number
+
+                $(".today-noon-set").text(set);
+                $(".today-noon-value").text(value);
+                $(".today-noon-result").text(num);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                if (textStatus == "timeout") {
+                    this.tryCount++;
+                    if (this.tryCount <= this.retryLimit) {
+                        //try again
+                        $.ajax(this);
+                        return;
+                    }
+                    return;
+                }
+                if (xhr.status == 500) {
+                    //handle error
+                } else {
+                    //handle error
+                }
+            },
+        });
+
+        $.ajax({
             url: twoD_url,
             type: "GET",
             dataType: "json",
@@ -258,8 +299,6 @@ $(document).ready(function () {
                 $(".lucky_number").addClass("lucky_number_blinking");
                 $(".today-evening-set").addClass("data_number_blinking");
                 $(".today-evening-value").addClass("data_number_blinking");
-
-                console.log("Evening Data Update");
             },
             error: function () {
                 console.log("error");
@@ -448,6 +487,8 @@ $(document).ready(function () {
     } else {
         console.log("Still not start working for today");
     }
+
+    getModernInternet();
 
     setInterval(() => {
         getModernInternet();
