@@ -153,55 +153,53 @@ $(document).ready(function () {
                 $(".today-evening-modern").text(evening_modern);
                 $(".today-evening-internet").text(evening_internet);
 
-             
+                if (market_status == "Pre-Open2") {
+                    $(".lucky_number").text(noon_result);
+                }
+
+                if (noon_result == "--") {
+                    if (market_status == "Open(I)") {
+                        $(".lucky_number").addClass("lucky_number_blinking");
+                        $(".today-noon-set").addClass("data_number_blinking");
+                        $(".today-noon-value").addClass("data_number_blinking");
+
+                        $(".today-noon-set").text(live_set);
+                        $(".today-noon-value").text(live_value);
+                        $(".lucky_number").text(live_result);
+
+                        $(".update-time").text("⏳ " + last_update);
+                    }
+                } else {
+                    if (market_status == "Intermission") {
+                        $(".lucky_number").text(noon_result);
+                        $(".update-time").text("✔ " + last_update);
+                    }
+
+                    $(".today-noon-set").text(live_set);
+                    $(".today-noon-value").text(live_value);
+                    $(".today-noon-result").text(noon_result);
+                }
+
+                if (evening_result == "--") {
+                    if (market_status == "Open(II)" || now < evening) {
+                        $(".lucky_number").addClass("lucky_number_blinking");
+                        $(".today-evening-set").addClass(
+                            "data_number_blinking"
+                        );
+                        $(".today-evening-value").addClass(
+                            "data_number_blinking"
+                        );
+
+                        $(".today-evening-set").text(live_set);
+                        $(".today-evening-value").text(live_value);
+                        $(".lucky_number").text(live_result);
+
+                        $(".update-time").text("⏳ " + last_update);
+                    }
+                }
 
                 if (market_status == "Closed") {
                     getOldNum();
-                }else{
-                    if (market_status == "Pre-Open2") {
-                        $(".lucky_number").text(noon_result);
-                    }
-    
-                    if (noon_result == "--") {
-                        if (market_status == "Open(I)") {
-                            $(".lucky_number").addClass("lucky_number_blinking");
-                            $(".today-noon-set").addClass("data_number_blinking");
-                            $(".today-noon-value").addClass("data_number_blinking");
-    
-                            $(".today-noon-set").text(live_set);
-                            $(".today-noon-value").text(live_value);
-                            $(".lucky_number").text(live_result);
-    
-                            $(".update-time").text("⏳ " + last_update);
-                        }
-                    } else {
-                        if (market_status == "Intermission") {
-                            $(".lucky_number").text(noon_result);
-                            $(".update-time").text("✔ " + last_update);
-                        }
-    
-                        $(".today-noon-set").text(live_set);
-                        $(".today-noon-value").text(live_value);
-                        $(".today-noon-result").text(noon_result);
-                    }
-    
-                    if (evening_result == "--" && noon_result != "--") {
-                        if (market_status == "Open(II)" || now < evening) {
-                            $(".lucky_number").addClass("lucky_number_blinking");
-                            $(".today-evening-set").addClass(
-                                "data_number_blinking"
-                            );
-                            $(".today-evening-value").addClass(
-                                "data_number_blinking"
-                            );
-    
-                            $(".today-evening-set").text(live_set);
-                            $(".today-evening-value").text(live_value);
-                            $(".lucky_number").text(live_result);
-    
-                            $(".update-time").text("⏳ " + last_update);
-                        }
-                    }
                 }
 
                 console.log(result);
@@ -213,12 +211,8 @@ $(document).ready(function () {
     };
 
     getData();
-    if(now > new Date().setHours(16, 45)){
-        console.log('today done');
-    }else{
-        setInterval(() => {
-            getData();
-        }, 5000);
-    }
-   
+
+    setInterval(() => {
+        getData();
+    }, 5000);
 });
